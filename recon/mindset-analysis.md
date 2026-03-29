@@ -157,13 +157,13 @@ File type validation appears weak → potential upload bypass
 
 ## 💣 Attack Hypotheses
 
-1. Search parameter may reflect user input → possible reflected XSS
-2. Product reviews may store unsanitized input → possible stored XSS
-3. Basket ID manipulation may allow access to other users’ baskets → IDOR
-4. JWT token may be tampered to escalate privileges → authentication bypass
-5. File upload functionality may allow malicious file execution → possible RCE
+1. Search functionality processes user input in the frontend and injects it into the DOM without proper sanitization → confirmed DOM-based XSS
+2. Feedback input fields may store unsanitized user input → potential stored XSS
+3. Basket ID manipulation (`/rest/basket/{id}`) may allow access to other users’ data → IDOR
+4. JWT token containing user role and identity may be trusted without proper verification → potential privilege escalation
+5. File upload functionality (`/rest/memories`) may allow malicious file execution if validation is weak → potential RCE
 6. API endpoints may expose sensitive data without proper authorization checks
-7. Client-controlled parameters may allow business logic manipulation
+7. Client-controlled parameters (quantity, IDs) may allow business logic manipulation
 
 ---
 
