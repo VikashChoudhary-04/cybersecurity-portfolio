@@ -198,3 +198,60 @@ Additional Variations Tested (Worked):
 * Indicates partial filtering but improper output encoding
 
 ---
+---
+
+## 🔬 Advanced Analysis (Day 3)
+
+### 🔍 Source
+
+User-controlled input is taken from the `q` parameter in the search functionality:
+
+```
+/rest/products/search?q=
+```
+
+---
+
+### 🎯 Sink
+
+The application inserts user input into the DOM using unsafe methods (e.g., `innerHTML`), which allows execution of injected HTML content.
+
+---
+
+### 🔄 DOM-Based Execution
+
+* The payload is not executed via server response
+* Instead, it is processed and rendered by client-side JavaScript
+* This confirms a DOM-based XSS vulnerability
+
+---
+
+### 🛡️ Filter Bypass Analysis
+
+* `<script>` tags are blocked or not executed
+* Event-based payloads such as `<img onerror>` successfully bypass filters
+
+👉 This indicates:
+
+* Partial input filtering
+* Lack of proper output encoding
+
+---
+
+### 💣 Exploitation Insight
+
+The vulnerability allows execution of arbitrary JavaScript via DOM manipulation, making it possible to:
+
+* Steal JWT tokens
+* Perform actions on behalf of the user
+* Manipulate application behavior
+
+---
+
+### 🧠 Key Learning
+
+* DOM XSS requires analyzing frontend behavior, not just server responses
+* Filters can be bypassed using alternative payloads
+* Understanding source and sink is critical for exploitation
+
+---
