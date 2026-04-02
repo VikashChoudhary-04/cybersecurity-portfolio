@@ -71,3 +71,75 @@ High
 
 - What I would test next:
   POST endpoints, API calls, and multi-step flows
+
+---
+
+## Advanced IDOR Testing
+
+### Multi-Step Flow Tested
+
+1. Retrieved user data:
+GET /api/user?id=101
+
+2. Found update endpoint:
+POST /api/user/update
+
+3. Modified request:
+{
+  "user_id": 102,
+  "email": "attacker@mail.com"
+}
+
+---
+
+### Result
+
+- Successfully modified another user's data
+- No authorization check present
+
+---
+
+### Horizontal Escalation
+
+- Accessed data of other users by modifying IDs
+
+---
+
+### Vertical Escalation
+
+- Tested admin endpoints 
+
+---
+
+### Vulnerability Chaining
+
+- Combined IDOR with profile update
+- Demonstrated potential account takeover
+
+---
+
+### Impact (Updated)
+
+- Unauthorized data access
+- Unauthorized data modification
+- Account takeover risk
+- Privilege escalation 
+
+---
+
+### Severity (Updated)
+
+Critical
+
+---
+
+### Thinking Log (Updated)
+
+- Why I tested this:
+  IDOR often becomes critical when combined with actions
+
+- What I ignored:
+  Read-only endpoints without impact
+
+- What I would test next:
+  Password reset, admin actions, financial endpoints
