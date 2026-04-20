@@ -1,18 +1,31 @@
-# 🏢 MiniCorp Security Assessment (Simulation)
+# 🏢 MiniCorp Security Assessment
 
 ## 📌 Overview
 
-- MiniCorp is a simulated web application used to demonstrate real-world penetration testing methodology.
+- This project demonstrates a structured penetration test performed on a simulated web application (MiniCorp).
 
-- The goal was to identify vulnerabilities, validate them, and assess their impact.
+- The objective was to identify vulnerabilities, validate their impact, and present findings in a professional format aligned with real-world pentesting practices.
 
 ---
 
-## 🔍 Scope
+## 🎯 Scope
 
 * Authentication system
 * User data access
-* Input fields
+* Input handling mechanisms
+
+---
+
+## 🧠 Methodology
+
+The assessment followed a structured workflow:
+
+1. Reconnaissance (attack surface mapping)
+2. Input identification
+3. Vulnerability testing (XSS, IDOR, SQL Injection)
+4. Exploitation
+5. Validation (false positive removal)
+6. Reporting
 
 ---
 
@@ -20,41 +33,43 @@
 
 ### 🔴 SQL Injection → Authentication Bypass
 
-* Bypassed login using crafted input
+* Successfully bypassed login using injection payload
 * Gained administrative access
 
 ---
 
 ### 🟠 IDOR → Unauthorized Data Access
 
-* Accessed other users’ data by modifying IDs
+* Accessed other users’ data by modifying object IDs
+* No ownership validation present
 
 ---
 
 ### 🟡 XSS → Client-side Execution
 
-* Executed JavaScript in browser
+* Executed arbitrary JavaScript in browser
+* Impact limited due to secure cookie handling
 
 ---
 
-## 🧠 Attack Flow
+## 📊 Impact Summary
 
-Recon → Input Mapping → Exploitation → Validation → Reporting
-
----
-
-## 📊 Impact
-
-* Unauthorized access
-* Data exposure
-* System compromise
+* Unauthorized system access
+* Exposure of user data
+* Potential client-side manipulation
 
 ---
 
 ## 🛡️ Recommendations
 
-* Input validation
-* Parameterized queries
-* Proper authorization checks
+* Use parameterized queries (prevent SQL Injection)
+* Implement strict access control (prevent IDOR)
+* Sanitize and encode user input (prevent XSS)
+
+---
+
+## 📌 Conclusion
+
+- This assessment demonstrates the ability to identify and validate real-world vulnerabilities using a structured and professional approach.
 
 ---
