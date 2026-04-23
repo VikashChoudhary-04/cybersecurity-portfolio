@@ -68,3 +68,10 @@
 - This repository reflects practical, hands-on security testing aligned with real-world penetration testing workflows and industry expectations.
 
 ---
+
+## 📁 Repository Structure
+
+- `projects/` → Practical testing work  
+- `reports/` → Professional vulnerability reports  
+- `recon/` → Reconnaissance and analysis  
+- `screenshots/` → Proof of exploitation  
